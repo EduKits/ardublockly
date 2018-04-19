@@ -43,23 +43,6 @@ Ardublockly.materializeJsInit = function() {
   $('select').material_select();
 };
 
-/** Binds the event listeners relevant to the page design. */
-Ardublockly.bindDesignEventListeners = function() {
-  // Resize blockly workspace on window resize
-  window.addEventListener(
-      'resize', Ardublockly.resizeBlocklyWorkspace, false);
-  // Display/hide the XML load button when the XML collapsible header is clicked
-  document.getElementById('xml_collapsible_header').addEventListener(
-      'click', Ardublockly.buttonLoadXmlCodeDisplay);
-  // Display/hide the additional IDE buttons when mouse over/out of play button
-  $('#button_ide_large').mouseenter(function() {
-      Ardublockly.showExtraIdeButtons(true);
-  });
-  $('#ide_buttons_wrapper').mouseleave(function() {
-      Ardublockly.showExtraIdeButtons(false);
-  });
-};
-
 /**
  * Displays or hides the 'load textarea xml' button based on the state of the
  * collapsible 'xml_collapsible_body'.
@@ -276,16 +259,6 @@ Ardublockly.materialAlert = function(title, body, confirm, callback) {
   window.location.hash = '';
 };
 
-/** Opens the modal that displays the "not connected to server" message. */
-Ardublockly.openNotConnectedModal = function() {
-  $('#not_running_dialog').openModal({
-    dismissible: true,
-    opacity: .5,
-    in_duration: 200,
-    out_duration: 250
-  });
-};
-
 /** Opens the modal that displays the Settings. */
 Ardublockly.openSettingsModal = function() {
   $('#settings_dialog').openModal({
@@ -386,17 +359,20 @@ Ardublockly.sketchNameSizeEffect = function() {
   var correctInput = function() {
     // If nothing in the input, add default name
     if ($(this).val() == '') {
-      $(this).val('Sketch_Name');
+      $(this).val('Project name');
       $(this).attr('size', 10);
     }
-    // Replace all spaces with underscores
-    $(this).val($(this).val().replace(/ /g, '_'));
   };
 
   var sketchNameInput = $('#sketch_name');
   sketchNameInput.keydown(resizeInput).each(resizeInput);
   sketchNameInput.blur(correctInput);
 };
+
+var replaceSpaces = function() {
+  // Replace all spaces with underscores
+  $(this).val($(this).val().replace(/ /g, '_'));
+}
 
 /**
  * Sets a string to the SketchName input field and triggers the events set from

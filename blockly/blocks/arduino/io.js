@@ -18,7 +18,87 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Types');
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.io.HUE = 250;
+Blockly.Blocks.io.HUE = 270;
+
+Blockly.HSV_SATURATION = 0.75;
+Blockly.HSV_VALUE = 0.90;
+
+Blockly.Blocks['io_writeRGBLED'] = {
+  /**
+   * Block for turning an RGB LED either on or off
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendValueInput('STATE')
+        .appendField(new Blockly.FieldImage("img/rgbLEDico.png", 14, 14, "*"))
+        .appendField("Turn")
+        .appendField(new Blockly.FieldDropdown(
+            [["Colour","COLOUR"]]), 'PIN')
+        .appendField("light to")
+        .setCheck(Blockly.Types.BOOLEAN.checkList);
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_DIGITALWRITE_TIP);
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'digitalPins');
+  }
+};
+
+Blockly.Blocks['io_setRGBLED'] = {
+  /**
+   * Block for creating a 'set pin' to a state.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("img/filledLEDico.png", 14, 14, "*"))
+        .appendField("Set")
+        .appendField(new Blockly.FieldDropdown([["Colour","COLOUR"]]), "LED")
+        .appendField("light to")
+        .appendField(new Blockly.FieldColour("#ffffff"), "COLOUR");
+    this.setColour(280);
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_DIGITALWRITE_TIP);
+  },
+};
+
+Blockly.Blocks['io_buzzerwrite'] = {
+  /**
+   * Block for turning a buzzer on or off
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendValueInput('STATE')
+        .appendField(new Blockly.FieldImage("img/buzzerico.png", 14, 14, "*"))
+        .appendField("Turn buzzer to")
+        .setCheck(Blockly.Types.BOOLEAN.checkList);
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_DIGITALWRITE_TIP);
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'digitalPins');
+  }
+};
 
 Blockly.Blocks['io_digitalwrite'] = {
   /**
@@ -182,6 +262,29 @@ Blockly.Blocks['io_highlow'] = {
     this.appendDummyInput()
         .appendField(
             new Blockly.FieldDropdown([[Blockly.Msg.ARD_HIGH, 'HIGH'], [Blockly.Msg.ARD_LOW, 'LOW']]),
+           'STATE');
+    this.setOutput(true, Blockly.Types.BOOLEAN.output);
+    this.setTooltip(Blockly.Msg.ARD_HIGHLOW_TIP);
+  },
+  /** @return {!string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.BOOLEAN;
+  }
+};
+
+Blockly.Blocks['io_onoff'] = {
+  /**
+   * Block for creating an on/off dropdown. This is used for analogue outputs only.
+   * @this Blockly.Block
+   *
+   * TODO: Make sure that this block only works with analogue outputs e.g. LEDS or buzzers.
+   */
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/Constants');
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendDummyInput()
+        .appendField(
+            new Blockly.FieldDropdown([['ON', 'HIGH'], ['OFF', 'LOW']]),
            'STATE');
     this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setTooltip(Blockly.Msg.ARD_HIGHLOW_TIP);

@@ -17,7 +17,7 @@ goog.require('Blockly.Types');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.time.HUE = 140;
+Blockly.Blocks.time.HUE = 205;
 
 Blockly.Blocks['time_delay'] = {
   /**
@@ -107,7 +107,7 @@ Blockly.Blocks['infinite_loop'] = {
    */
   init: function() {
     this.setHelpUrl('');
-    this.setColour(Blockly.Blocks.time.HUE);
+    this.setColour(345); // This block gets a special red colour
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_TIME_INF);
     this.setInputsInline(true);

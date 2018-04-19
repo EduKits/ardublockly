@@ -45,12 +45,12 @@ Blockly.BlockSvg.SEP_SPACE_Y = 10;
  * Vertical padding around inline elements.
  * @const
  */
-Blockly.BlockSvg.INLINE_PADDING_Y = 5;
+Blockly.BlockSvg.INLINE_PADDING_Y = 10;
 /**
  * Minimum height of a block.
  * @const
  */
-Blockly.BlockSvg.MIN_BLOCK_Y = 25;
+Blockly.BlockSvg.MIN_BLOCK_Y = 35;
 /**
  * Height of horizontal puzzle tab.
  * @const
@@ -65,12 +65,12 @@ Blockly.BlockSvg.TAB_WIDTH = 8;
  * Width of vertical tab (inc left margin).
  * @const
  */
-Blockly.BlockSvg.NOTCH_WIDTH = 30;
+Blockly.BlockSvg.NOTCH_WIDTH = 50;
 /**
  * Rounded corner radius.
  * @const
  */
-Blockly.BlockSvg.CORNER_RADIUS = 8;
+Blockly.BlockSvg.CORNER_RADIUS = 12;
 /**
  * Do blocks with no previous or output connections have a 'hat' on top?
  * @const

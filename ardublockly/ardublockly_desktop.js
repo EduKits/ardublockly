@@ -46,14 +46,8 @@ Ardublockly.containerFullWidth = function() {
   }
 };
 
-/** Hides the side menu button. */
-Ardublockly.hideSideMenuButton = function() {
-  var sideMenuButton = document.getElementById('button-collapse');
-  sideMenuButton.style.setProperty ('display', 'none', 'important');
-};
-
 /**
- * Launches a materialize modal as a text prompt 
+ * Launches a materialize modal as a text prompt
  * @param {string} message Main text message for the window prompt.
  * @param {string=} defaultValue Input string to be displayed by default.
  * @param {function} callback To process the user input.
@@ -74,7 +68,7 @@ Ardublockly.htmlPrompt = function(message, defaultValue, callback) {
 };
 
 /**
- * Add click listeners to the Compiler and Sketch input fields to launch the 
+ * Add click listeners to the Compiler and Sketch input fields to launch the
  * Electron file/folder browsers.
  */
 Ardublockly.bindSettingsPathInputs = function() {

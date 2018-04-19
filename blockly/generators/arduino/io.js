@@ -13,6 +13,86 @@ goog.provide('Blockly.Arduino.IO');
 
 goog.require('Blockly.Arduino');
 
+function hexToRgbA(hex){
+    var c;
+    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+        c= hex.substring(1).split('');
+        if(c.length== 3){
+            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c= '0x'+c.join('');
+        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',1)';
+    }
+    throw new Error('Bad Hex');
+}
+
+/**
+ * Controlling a standard RGB LED...
+ * Function for 'set pin' (X) to a state (Y).
+ * Arduino code: setup { pinMode(X, OUTPUT); }
+ *               loop  { digitalWrite(X, Y); }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['io_writeRGBLED'] = function(block) {
+  var pin1 = 1;
+
+  var stateOutput = Blockly.Arduino.valueToCode(
+      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
+
+  Blockly.Arduino.reservePin(
+      block, pin1, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+
+  var pinSetupCode = 'pinMode(1, OUTPUT);';
+  Blockly.Arduino.addSetup('io_' + pin1, pinSetupCode, false);
+
+  var code = 'digitalWrite(' + pin1 + ', ' + stateOutput + ');\n';
+  return code;
+};
+
+/**
+ * Set the colour of an RGB led.
+ * This does not require pin number.
+ * Converts hex colour into individual channels
+ * and sends to the LED. Very cool.
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['io_setRGBLED'] = function(block) {
+  var hexColour = block.getFieldValue('COLOUR');
+
+  var colorString = hexToRgbA(hexColour),
+  colorsOnly = colorString.substring(colorString.indexOf('(') + 1, colorString.lastIndexOf(')')).split(/,\s*/),
+  $red = colorsOnly[0],
+  $green = colorsOnly[1],
+  $blue = colorsOnly[2];
+
+  var code = 'analogWrite(9, '+$red+');\nanalogWrite(10, '+$green+');\nanalogWrite(11, '+$blue+');\n';
+  return code;
+};
+
+/**
+ * Function for turning on or off a standard buzzer.
+ * Arduino code: setup { pinMode(X, OUTPUT); }
+ *               loop  { digitalWrite(X, Y); }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['io_buzzerwrite'] = function(block) {
+  var pin = 3; // This is the default buzzer pin for codeables
+  var stateOutput = Blockly.Arduino.valueToCode(
+      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+
+  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+
+  var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
+  return code;
+};
+
 
 /**
  * Function for 'set pin' (X) to a state (Y).
@@ -137,6 +217,14 @@ Blockly.Arduino['io_highlow'] = function(block) {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+/**
+ * Same as above, but with labels on'off
+ */
+Blockly.Arduino['io_onoff'] = function(block) {
+  var code = block.getFieldValue('STATE');
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino['io_pulsein'] = function(block) {
   var pin = block.getFieldValue("PULSEPIN");
   var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
@@ -166,4 +254,4 @@ Blockly.Arduino['io_pulsetimeout'] = function(block) {
   var code = 'pulseIn(' + pin + ', ' + type + ', ' + timeout + ')';
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
-}; 
+};

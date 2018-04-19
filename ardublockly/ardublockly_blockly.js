@@ -37,7 +37,7 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxXml, blocklyPath) {
   Ardublockly.updateToolboxLanguage();
   Ardublockly.workspace = Blockly.inject(blocklyEl, {
       collapse: true,
-      comments: true,
+      comments: false,
       css: true,
       disable: true,
       grid: false,
@@ -47,7 +47,7 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxXml, blocklyPath) {
       scrollbars: true,
       sounds: true,
       toolbox: Ardublockly.xmlTree,
-      trashcan: true,
+      trashcan: false,
       zoom: {
         controls: true,
         wheel: false,

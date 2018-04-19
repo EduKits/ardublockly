@@ -17,11 +17,11 @@
   <link rel="stylesheet" href="style.css">
 
   <!-- Ardublockly - These three files contain the compress version -->
-  <script src="../blockly/blockly_compressed.js"></script>
+  <!--<script src="../blockly/blockly_compressed.js"></script>
   <script src="../blockly/blocks_compressed.js"></script>
-  <script src="../blockly/arduino_compressed.js"></script>
+  <script src="../blockly/arduino_compressed.js"></script>-->
   <!-- To use the uncompressed version comment out the above and comment in the ones below -->
-  <!--script src="../blockly/blockly_uncompressed.js"></script>
+  <script src="../blockly/blockly_uncompressed.js"></script>
   <script src="../blockly/blocks/logic.js"></script>
   <script src="../blockly/blocks/loops.js"></script>
   <script src="../blockly/blocks/math.js"></script>
@@ -56,7 +56,7 @@
   <script src="../blockly/generators/arduino/text.js"></script>
   <script src="../blockly/generators/arduino/time.js"></script>
   <script src="../blockly/generators/arduino/tone.js"></script>
-  <script src="../blockly/generators/arduino/variables.js"></script-->
+  <script src="../blockly/generators/arduino/variables.js"></script>
 
   <!-- Default language js files, user selection appended to head on load -->
   <script src="../blockly/msg/js/en.js"></script>
@@ -67,12 +67,18 @@
   <!-- Horizontal Navigation bar -->
   <nav class="nav-fixed" style="max-width: 70%;">
     <div class="nav-wrapper container">
-      <a href="https://edukits.co">
-        <img src="img/edukits_logo.png" style="max-height: 100px;padding: 20px;">
+      <a href="https://codeables.io/">
+        <img src="img/favicon.svg" class="main-logo" style="height:100px; padding: 18px; float:left;" />
       </a>
+      <div class="icon-menu" style="display:inline-block; width: 190px; font-size: 0.8em; color: #444444;">
+        <ul style="height:100%;position: relative;top: 18px;">
+          <li><a href="#"><i class="far fa-bars" style="color:#444444; font-size: 18px;"></i></a></li>
+          <li><a href="#"><i class="far fa-cogs" style="color:#444444; font-size: 18px;"></i></a></li>
+          <li><a href="#"><i class="far fa-plus" style="color:#444444; font-size: 18px;"></i></a></li>
+        </ul>
+      </div>
       <a style="display:none !important;" class="show-on-large button-collapse" href="#" data-activates="slide-out" id="button-collapse"><i class="mdi-navigation-menu"></i></a>
       <a id="logo-container" class="brand-logo">
-        <img style="height:130px;position:relative;top:-5px;float:left;" src="img/codeables_logo.png">
         <!-- Sketch name editable text field -->
         <span class="sketch_name_wrapper">
           <i class="mdi-image-edit sketch_name_icon"></i>
@@ -81,41 +87,10 @@
       </a>
       <!-- Horizontal Navbar links only shown on large resolutions -->
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="https://edukits.co" class="button-fancy"><span class="translatable_open">Help &amp; support</span></a></li>
+        <li><a href="javascript:blocklyZoomIn()" class="button-fancy"><span class="translatable_open">Help &amp; support</span></a></li>
       </ul>
     </div>
   </nav>
-
-  <!-- Sidebar navigation -->
-  <ul id="slide-out" class="side-nav">
-    <li class="logo"><img src="img/sidenav_header.png" alt="Ardublockly block image"></li>
-    <li class="no-padding">
-      <ul>
-        <li id="menu_load"><a href="#"><span class="translatable_open">Open</span><i class="mdi-file-file-upload left"></i></a></li>
-        <li id="menu_save"><a href="#"><span class="translatable_save">Save</span><i class="mdi-file-file-download left"></i></a></li>
-        <li id="menu_delete"><a href="#"><span class="translatable_deleteAll">Delete All</span><i class="mdi-action-delete left"></i></a></li>
-        <li id="menu_settings"><a href="#"><span class="translatable_settings">Settings</span><i class="mdi-action-settings left"></i></a></li>
-        <li id="menu_bug"><a href="https://github.com/carlosperate/ardublockly/wiki" target="_blank"><span class="translatable_documentation">Documentation</span><i class="mdi-action-help left"></i></a></li>
-        <li id="menu_bug"><a href="http://github.com/carlosperate/ardublockly/issues" target="_blank"><span class="translatable_reportBug">Report Bug</span><i class="mdi-action-bug-report left"></i></a></li>
-      </ul>
-    <li class="no-padding">
-      <ul class="collapsible collapsible-accordion">
-        <li>
-          <div class="collapsible-header"><span class="translatable_examples">Examples</span><i class="mdi-navigation-arrow-drop-down"></i></div>
-          <div class="collapsible-body">
-            <ul>
-              <li id="menu_example_1"><a href="#!">Blink</a></li>
-              <li id="menu_example_2"><a href="#!">Serial print</a></li>
-              <li id="menu_example_3"><a href="#!">Serial repeat game</a></li>
-              <li id="menu_example_4"><a href="#!">Servo knob</a></li>
-              <li id="menu_example_5"><a href="#!">Stepper knob</a></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </li>
-    <li class="no-padding side-menu-end">&nbsp;</li>
-  </ul>
 
   <!-- Content -->
   <div class="container">
@@ -124,49 +99,6 @@
         <!-- Toolbox visibility button -->
         <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off" style="display: none"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
         <!-- Arduino IDE action buttons -->
-        <div id="ide_buttons_wrapper">
-          <a id="button_ide_left" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_yellow"><i id="button_ide_left_icon" class="mdi-action-open-in-browser"></i></a>
-          <a id="button_ide_middle" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_teal"><i id="button_ide_middle_icon" class="mdi-navigation-check"></i></a>
-          <a id="button_ide_large" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange"><i id="button_ide_large_icon" class="mdi-av-play-arrow"></i></a>
-          <div id="button_ide_large_spinner" class="preloader-wrapper active ide_loader" style="display:none">
-            <div class="spinner-layer spinner-orange">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
-            </div>
-            <div class="spinner-layer spinner-dark-teal">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
-            </div>
-            <div class="spinner-layer spinner-yellow">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
-            </div>
-            <div class="spinner-layer spinner-light-teal">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div><div class="gap-patch">
-                <div class="circle"></div>
-              </div><div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div id="content_blocks" class="content z-depth-1" style="height:100%;"></div>
         <!-- Blockly Panel -->
 
@@ -174,7 +106,7 @@
 
       <div class="code-container">
         <div class="container-header">
-          <a href="javascript:sendallcode()">Send code <i class="fa fa-arrow-right"></i></a>
+          <a href="javascript:downloadcode()">Download code <i class="fa fa-arrow-right"></i></a>
         </div>
         <pre id="content_arduino" class="content content_height_transition content_arduino_large prettyprint"></pre>
         <ul class="collapsible z-depth-1" style="display: none;" data-collapsible="accordion">
@@ -222,22 +154,6 @@
 
     </div>
   </div>
-
-  <!-- IDE Output content -->
-  <div class="ide_output_wrapper">
-    <ul class="collapsible ide_output_collapsible" data-collapsible="expandable">
-      <li>
-        <div id="ide_output_collapsible_header" class="collapsible-header ide_output_header_normal">
-          <i class="mdi-action-swap-vert Medium" style="font-size: 2.2rem;"></i>
-          <span class="translatable_arduinoOpMainTitle">Arduino IDE output</span>
-        </div>
-        <div class="collapsible-body">
-          <div id="content_ide_output" class="content"></div>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="ide_output_spacer"></div>
 
   <!-- Settings: Displayed as a Materialize Modal -->
   <div id="settings_dialog" class="modal modal-fixed-footer">
@@ -295,7 +211,7 @@
   <!-- General Alert: Content is loaded using JavaScript to display alerts -->
   <div id="gen_alert" class="modal modal_small modal-fixed-footer">
     <div class="modal-content">
-      <h5 id="gen_alert_title">Empty Alert</h4>
+      <h5 id="gen_alert_title" style="font-weight: 700;">Empty Alert</h4>
       <p><span id="gen_alert_body">Empty alert text</span></p>
     </div>
     <div class="modal-footer">
