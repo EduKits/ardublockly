@@ -69,6 +69,7 @@ Blockly.Arduino.PinTypes = {
   INPUT: 'INPUT',
   OUTPUT: 'OUTPUT',
   PWM: 'PWM',
+  SENSOR: 'SENSOR',
   SERVO: 'SERVO',
   STEPPER: 'STEPPER',
   SERIAL: 'SERIAL',

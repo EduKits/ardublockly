@@ -61,14 +61,21 @@ Blockly.Arduino['io_writeRGBLED'] = function(block) {
 Blockly.Arduino['io_setRGBLED'] = function(block) {
   var hexColour = block.getFieldValue('COLOUR');
 
+  var lightType = block.getFieldValue('LED');
+
   var colorString = hexToRgbA(hexColour),
   colorsOnly = colorString.substring(colorString.indexOf('(') + 1, colorString.lastIndexOf(')')).split(/,\s*/),
   $red = colorsOnly[0],
   $green = colorsOnly[1],
   $blue = colorsOnly[2];
 
-  var code = 'analogWrite(9, '+$red+');\nanalogWrite(10, '+$green+');\nanalogWrite(11, '+$blue+');\n';
-  return code;
+  if(lightType == "COLOUR") {
+    var code = 'analogWrite(9, '+$red+');\nanalogWrite(10, '+$green+');\nanalogWrite(11, '+$blue+');\n';
+    return code;
+  } else if(lightType == "ANODE") {
+    var code = 'analogWrite(9, 255 - '+$red+');\nanalogWrite(10, 255 - '+$green+');\nanalogWrite(11, 255 - '+$blue+');\n';
+    return code;
+  }
 };
 
 /**
@@ -91,6 +98,36 @@ Blockly.Arduino['io_buzzerwrite'] = function(block) {
 
   var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
   return code;
+};
+
+/**
+ * Function for reading the ultrasonic sensor distance.
+ * Currently only supports cm.
+ * @todo extend functionality to support inches. Should be relatively
+ * simple (see default 'Ping' sketch).
+ */
+Blockly.Arduino['io_ultrasonicread'] = function(block) {
+  var units = block.getFieldValue('UNITS');
+
+  var trigPin = 7;
+  var echoPin = 8;
+
+  Blockly.Arduino.reservePin(
+      block, trigPin, Blockly.Arduino.PinTypes.INPUT, 'Ultrasonic Read');
+  Blockly.Arduino.reservePin(
+      block, echoPin, Blockly.Arduino.PinTypes.INPUT, 'Ultrasonic Read');
+
+  var pinSetupCode = 'pinMode(' + trigPin + ', OUTPUT);\n  pinMode(' + echoPin + ', INPUT);';
+  Blockly.Arduino.addSetup('ultrasonic', pinSetupCode, false);
+
+   var funcName = 'Ultrasonic';
+   // Construct code
+    var codeFunc = 'int readDistance() {\n  long duration, inches, cm;\n  digitalWrite(' + trigPin + ', LOW);\n  delayMicroseconds(2);\n  digitalWrite(' + trigPin + ', HIGH);\n  delayMicroseconds(5);\n  digitalWrite(' + trigPin + ', LOW);\n  duration = pulseIn(' + echoPin + ', HIGH);\n  delay(50);\n  return duration / 29 / 2;\n}';
+    codeFunc = Blockly.Arduino.scrub_(block, codeFunc);
+    Blockly.Arduino.userFunctions_[funcName] = codeFunc;
+
+  var code = 'readDistance()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC]; // We have to declare that this value will return a number when run
 };
 
 

@@ -45,12 +45,12 @@ Blockly.BlockSvg.SEP_SPACE_Y = 10;
  * Vertical padding around inline elements.
  * @const
  */
-Blockly.BlockSvg.INLINE_PADDING_Y = 10;
+Blockly.BlockSvg.INLINE_PADDING_Y = 7.5;
 /**
  * Minimum height of a block.
  * @const
  */
-Blockly.BlockSvg.MIN_BLOCK_Y = 35;
+Blockly.BlockSvg.MIN_BLOCK_Y = 30;
 /**
  * Height of horizontal puzzle tab.
  * @const

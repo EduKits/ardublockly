@@ -55,17 +55,17 @@ Blockly.Blocks['io_writeRGBLED'] = {
 
 Blockly.Blocks['io_setRGBLED'] = {
   /**
-   * Block for creating a 'set pin' to a state.
+   * Set an RGB LED to a specific colour via the colour picker.
    * @this Blockly.Block
    */
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("img/filledLEDico.png", 14, 14, "*"))
         .appendField("Set")
-        .appendField(new Blockly.FieldDropdown([["Colour","COLOUR"]]), "LED")
+        .appendField(new Blockly.FieldDropdown([["Colour","COLOUR"], ["Common Anode","ANODE"]]), "LED")
         .appendField("light to")
         .appendField(new Blockly.FieldColour("#ffffff"), "COLOUR");
-    this.setColour(280);
+    this.setColour(Blockly.Blocks.io.HUE);
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -98,6 +98,21 @@ Blockly.Blocks['io_buzzerwrite'] = {
     Blockly.Arduino.Boards.refreshBlockFieldDropdown(
         this, 'PIN', 'digitalPins');
   }
+};
+
+Blockly.Blocks['io_ultrasonicread'] = {
+  /**
+   * Block for reading the value from an Ultrasonic sensor
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setColour(330);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("img/ultrasonicico.png", 14, 14, "*"))
+        .appendField("Read distance in")
+        .appendField(new Blockly.FieldDropdown([["cm","CM"], ["inches","INCHES"]]), "UNITS");
+    this.setOutput(true, Blockly.Types.NUMBER.output);
+  },
 };
 
 Blockly.Blocks['io_digitalwrite'] = {

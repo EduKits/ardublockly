@@ -6,6 +6,35 @@
  */
 'use strict';
 
+/*
+**
+** Start copy to clipboard functionality
+**
+*/
+var clipboard = new ClipboardJS('.copy-code');
+
+clipboard.on('success', function(e) {
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
+    Ardublockly.MaterialToast("Copied!");
+    e.clearSelection();
+    clearSelection();
+});
+
+clipboard.on('error', function(e) {
+    console.error('Action:', e.action);
+    console.error('Trigger:', e.trigger);
+    Ardublockly.MaterialToast("You'll need some code first.");
+});
+
+// Function to clear all text selection made during copying
+function clearSelection()
+{
+ if (window.getSelection) {window.getSelection().removeAllRanges();}
+ else if (document.selection) {document.selection.empty();}
+}
+
 /** Create a namespace for the application. */
 var Ardublockly = Ardublockly || {};
 
@@ -496,7 +525,3 @@ Ardublockly.bindClick_ = function(el, func) {
   el.addEventListener('ontouchend', propagateOnce);
   el.addEventListener('click', propagateOnce);
 };
-
-function blocklyZoomIn() {
-  
-}

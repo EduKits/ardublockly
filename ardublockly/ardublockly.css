@@ -33,6 +33,7 @@ body {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  overflow: hidden;
 }
 
 
@@ -297,7 +298,7 @@ ul.side-nav li.side-menu-end {
 }
 .sketch_name {
   width: auto !important;
-  min-width: 110px;
+  min-width: 180px;
   max-width: 200px;
   line-height: 64px;
   height: 3rem !important;
@@ -348,7 +349,7 @@ ul.side-nav li.side-menu-end {
 
 /* Colours for the new and deleted code highlighting */
 .code_highlight_new {
-  background-color: rgba(255, 204, 51, 0.5); /* Arduino yellow 50% */
+  background-color: rgba(255, 204, 51, 0); /* Arduino yellow 50% */
 }
 .code_highlight_deleted {
   background-color: #FDBEBE;
@@ -362,15 +363,35 @@ ul.side-nav li.side-menu-end {
 .blocklyTreeLabel,           /* Toolbox        */
 .blocklyText,                /* Block          */
 .goog-menuitem-content {     /* Drop down menu */
-  font-family: "Roboto", sans-serif!important;
+  font-family: 'Poppins', sans-serif!important;
 }
+
+.blocklyText {
+  font-size: 13px !important;
+}
+
+.blockl
 
 /* Entire Blockly area, Toolbox dranw on top */
 .blocklySvg {
   border-width: 0 !important;
 }
 
+/* Block Drop-down menu styling */
+.blocklyWidgetDiv .goog-menu {
+  border: 1px solid #EEE !important;
+  border-radius: 4px !important;
+}
+.blocklyWidgetDiv .goog-menuitem-highlight {
+  background-color: #f6f7fa !important;
+  border-top-color: #f6f7fa !important;
+  border-bottom-color: #f6f7fa !important;
+}
+
 /* Toolbox */
+.blocklyMainBackground {
+  stroke: none !important;
+}
 .blocklyToolboxDiv {
   border: none !important;
   -webkit-border-radius: 0px !important;
@@ -423,7 +444,6 @@ ul.side-nav li.side-menu-end {
 .blocklyTreeLabel {
   font-family: 'Poppins' !important;
   font-weight: 600 !important;
-  text-transform: uppercase !important;
 }
 .blocklyTreeSeparator{
   padding: 0px !important;
@@ -433,7 +453,7 @@ ul.side-nav li.side-menu-end {
 
 /* Toolbox second column with blocks*/
 .blocklyFlyoutBackground {
-  fill: #DEEEEF !important;
+  fill: #ececec !important;
   fill-opacity: 0.7 !important;
   -webkit-border-radius: 0px 4px 4px 0px !important;
   -moz-border-radius: 0px 4px 4px 0px !important;
@@ -442,7 +462,7 @@ ul.side-nav li.side-menu-end {
 
 /* Blockly scrollbars */
 .blocklyScrollbarKnob {
-  fill: #8f037a !important;
+  fill: #3b038f !important;
   fill-opacity: 0.7 !important;
 }
 .blocklyScrollbarBackground {
@@ -463,24 +483,10 @@ ul.side-nav li.side-menu-end {
 .container {
   max-width: initial !important;
   padding: none;
+  width: 100%;
 }
 .row .col {
   padding: 0 !important;
-}
-@media only screen and (min-width : 601px) {
-  .container {
-    width: 95%;
-  }
-}
-@media only screen and (min-width : 993px) {
-  .container {
-    width: 100%;
-  }
-}
-@media only screen and (min-width : 1380px) {
-  .container {
-    width: 90%;
-  }
 }
 
 /* Change table padding (interferes with colour picker) */

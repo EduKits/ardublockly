@@ -195,6 +195,25 @@ Ardublockly.discardAllBlocks = function() {
   }
 };
 
+/** Create a new project and discard all blocks from the workspace. */
+Ardublockly.createNewProject = function() {
+  var blockCount = Ardublockly.workspace.getAllBlocks().length;
+  if (blockCount == 1) {
+    Ardublockly.workspace.clear();
+    Ardublockly.renderContent();
+  } else if (blockCount > 1) {
+    Ardublockly.alertMessage(
+        Ardublockly.getLocalStr('discardBlocksTitle'),
+        Ardublockly.getLocalStr('discardBlocksBody')
+            .replace('%1', blockCount),
+        true,
+        function() {
+          Ardublockly.workspace.clear();
+          Ardublockly.renderContent();
+        });
+  }
+};
+
 /** @return {!boolean} Indicates if the Blockly workspace has blocks. */
 Ardublockly.isWorkspaceEmpty = function() {
   return Ardublockly.workspace.getAllBlocks().length ? false : true;

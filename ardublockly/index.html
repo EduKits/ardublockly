@@ -11,15 +11,17 @@
   <link rel="stylesheet" href="materialize/materialize.css" media="screen,projection">
   <link rel="stylesheet" href="prettify/arduino.css">
   <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
-  <link rel="stylesheet" href="fontawesome/css/fontawesome.min.css" />
-  <link rel="stylesheet" href="fontawesome/css/fontawesome-all.min.css" />
+  <link rel="stylesheet" href="fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="fontawesome/css/fontawesome-all.min.css">
 
   <link rel="stylesheet" href="style.css">
 
+  <script src="clipboard.min.js"></script>
+
   <!-- Ardublockly - These three files contain the compress version -->
-  <!--<script src="../blockly/blockly_compressed.js"></script>
+  <!--script src="../blockly/blockly_compressed.js"></script>
   <script src="../blockly/blocks_compressed.js"></script>
-  <script src="../blockly/arduino_compressed.js"></script>-->
+  <script src="../blockly/arduino_compressed.js"></script-->
   <!-- To use the uncompressed version comment out the above and comment in the ones below -->
   <script src="../blockly/blockly_uncompressed.js"></script>
   <script src="../blockly/blocks/logic.js"></script>
@@ -74,7 +76,7 @@
         <ul style="height:100%;position: relative;top: 18px;">
           <li><a href="#"><i class="far fa-bars" style="color:#444444; font-size: 18px;"></i></a></li>
           <li><a href="#"><i class="far fa-cogs" style="color:#444444; font-size: 18px;"></i></a></li>
-          <li><a href="#"><i class="far fa-plus" style="color:#444444; font-size: 18px;"></i></a></li>
+          <li><a href="javascript:Ardublockly.createNewProject"><i class="far fa-plus" style="color:#444444; font-size: 18px;"></i></a></li>
         </ul>
       </div>
       <a style="display:none !important;" class="show-on-large button-collapse" href="#" data-activates="slide-out" id="button-collapse"><i class="mdi-navigation-menu"></i></a>
@@ -106,7 +108,10 @@
 
       <div class="code-container">
         <div class="container-header">
-          <a href="javascript:downloadcode()">Download code <i class="fa fa-arrow-right"></i></a>
+          <ul>
+            <li><a href="javascript:downloadcode()" class="download-code">Download <i class="far fa-arrow-circle-down"></i></a></li>
+            <li><a href="javascript:copycode()" class="copy-code" data-clipboard-target="#content_arduino">Copy code <i class="fal fa-copy"></i></a></li>
+          </ul>
         </div>
         <pre id="content_arduino" class="content content_height_transition content_arduino_large prettyprint"></pre>
         <ul class="collapsible z-depth-1" style="display: none;" data-collapsible="accordion">
@@ -252,7 +257,7 @@
 
   <!-- Desktop version of Ardublockly JS, needs to be loaded first. -->
   <script src="ardublockly_desktop.js"></script>
-  <!-- jQuery and Materialize JS -->
+  <!-- Materialize JS -->
   <script src="js_libs/jquery-2.1.3.min.js"></script>
   <script src="materialize/materialize.js"></script>
   <!-- FileSaver JS -->

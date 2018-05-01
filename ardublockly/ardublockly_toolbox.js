@@ -31,7 +31,7 @@ Ardublockly.TOOLBOX_XML =
 '    </block>' +
 '  </category>' +
 '  <category name="Sensors">' +
-'    <block type="serial_setup"></block>' +
+'    <block type="io_ultrasonicread"></block>' +
 '  </category>' +
 '  <category name="Controls">' +
 '    <block type="controls_if"></block>' +
@@ -71,9 +71,19 @@ Ardublockly.TOOLBOX_XML =
 '    </block>' +
 '  </category>' +
 '  <category name="Advanced">' +
+'    <block type="variables_get"></block>' +
+'    <block type="variables_set"></block>' +
+'    <block type="variables_set">' +
+'      <value name="VALUE">' +
+'        <block type="variables_set_type"></block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="variables_set_type"></block>' +
 '    <block type="serial_setup"></block>' +
+'    <block type="serial_print"></block>' +
 '  </category>' +
 '  <category name="Functions">' +
-'    <block type="serial_setup"></block>' +
+'    <block type="procedures_defnoreturn"></block>' +
+'    <block type="procedures_defreturn"></block>' +
 '  </category>' +
 '</xml>';
