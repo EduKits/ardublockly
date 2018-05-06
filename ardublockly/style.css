@@ -39,7 +39,11 @@ font-style: normal;
 }
 
 .button-fancy {
-  background: linear-gradient(to right, #ff6aa4, #f23855);
+  color: #ff2663;
+  background: linear-gradient(270deg, #ff2663, #f3507e, rgba(196,28,75,0), rgba(196,28,75,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  border: 1px solid #ff2663;
   border-radius: 5px;
   position: relative;
   right: 22px;
@@ -53,7 +57,9 @@ font-style: normal;
 }
 
 .button-fancy:hover {
-  box-shadow: -5px 5px 20px rgba(0,0,0,0.2);
+  color: #fff;
+  border: 1px solid rgba(255,38,99,0);
+  background-position: 99% 50%;
 }
 
 .container-header {
@@ -237,6 +243,10 @@ nav .brand-logo {
   padding-right: 5px;
 }
 
+#sidenav-overlay {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 .mirror {
   display: block;
   z-index: 99999 !important;
@@ -245,4 +255,8 @@ nav .brand-logo {
   position: absolute;
   bottom: 0;
   left: 0;
+}
+
+.button-collapse {
+  margin-right: 0 !important;
 }

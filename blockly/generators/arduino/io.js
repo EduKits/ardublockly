@@ -86,7 +86,7 @@ Blockly.Arduino['io_setRGBLED'] = function(block) {
  * @return {string} Completed code.
  */
 Blockly.Arduino['io_buzzerwrite'] = function(block) {
-  var pin = 3; // This is the default buzzer pin for codeables
+  var pin = kitConfig.connections.buzzer; // Read value from kitConfig
   var stateOutput = Blockly.Arduino.valueToCode(
       block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
 
@@ -109,8 +109,8 @@ Blockly.Arduino['io_buzzerwrite'] = function(block) {
 Blockly.Arduino['io_ultrasonicread'] = function(block) {
   var units = block.getFieldValue('UNITS');
 
-  var trigPin = 7;
-  var echoPin = 8;
+  var trigPin = kitConfig.connections.ultrasonic.trig;
+  var echoPin = kitConfig.connections.ultrasonic.echo;
 
   Blockly.Arduino.reservePin(
       block, trigPin, Blockly.Arduino.PinTypes.INPUT, 'Ultrasonic Read');
@@ -122,7 +122,7 @@ Blockly.Arduino['io_ultrasonicread'] = function(block) {
 
    var funcName = 'Ultrasonic';
    // Construct code
-    var codeFunc = 'int readDistance() {\n  long duration, inches, cm;\n  digitalWrite(' + trigPin + ', LOW);\n  delayMicroseconds(2);\n  digitalWrite(' + trigPin + ', HIGH);\n  delayMicroseconds(5);\n  digitalWrite(' + trigPin + ', LOW);\n  duration = pulseIn(' + echoPin + ', HIGH);\n  delay(50);\n  return duration / 29 / 2;\n}';
+    var codeFunc = 'int readDistance() {\n  float duration, distance;\n  digitalWrite(' + trigPin + ', LOW);\n  delayMicroseconds(2);\n  digitalWrite(' + trigPin + ', HIGH);\n  delayMicroseconds(10);\n  digitalWrite(' + trigPin + ', LOW);\n  duration = pulseIn(' + echoPin + ', HIGH) / 2 * 0.0344;\n  delay(50);\n  return duration;\n}';
     codeFunc = Blockly.Arduino.scrub_(block, codeFunc);
     Blockly.Arduino.userFunctions_[funcName] = codeFunc;
 

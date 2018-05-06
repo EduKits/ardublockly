@@ -21,12 +21,14 @@ Ardublockly.designJsInit = function() {
  * Initialises all required components from materialize framework.
  * The be executed on document ready.
  */
+
 Ardublockly.materializeJsInit = function() {
   // Navigation bar
   $('.button-collapse').sideNav({
-      menuWidth: 240,
+      menuWidth: 275,
       activationWidth: 70,
-      edge: 'left'
+      edge: 'left',
+      closeOnClick: true
   });
   // Drop down menus
   $('.dropdown-button').dropdown({hover: false});
@@ -42,6 +44,19 @@ Ardublockly.materializeJsInit = function() {
   // Select menus
   $('select').material_select();
 };
+
+/**
+ * Sets up functions for settings Overlay
+ * Cool stuff!
+ */
+
+function showSettings() {
+  $('.settings-overlay').fadeIn(100);
+}
+
+function hideSettings() {
+  $('.settings-overlay').fadeOut(100);
+}
 
 /**
  * Displays or hides the 'load textarea xml' button based on the state of the
@@ -351,6 +366,8 @@ Ardublockly.resetIdeOutputContent = function(bodyEl) {
  * Initialises the sketch name input text JavaScript to dynamically adjust its
  * width to the width of its contents.
  */
+
+
 Ardublockly.sketchNameSizeEffect = function() {
   var resizeInput = function() {
     $(this).attr('size', $(this).val().length);

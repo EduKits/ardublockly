@@ -270,7 +270,7 @@ Ardublockly.loadUserXmlFile = function() {
  */
 Ardublockly.saveXmlFile = function() {
   Ardublockly.saveTextFileAs(
-      document.getElementById('sketch_name').value + '.xml',
+      document.getElementById('sketch_name').value + '.cdb',
       Ardublockly.generateXml());
 };
 

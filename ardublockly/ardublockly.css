@@ -413,7 +413,7 @@ ul.side-nav li.side-menu-end {
 .blocklyTreeRoot {
   background: none !important;
   border: none !important;
-  margin: 36px 0px 0px 0px !important;
+  margin: 20px 0px 0px 0px !important;
   padding: 0px 1px !important;
   height: -moz-calc(100% - 37px);     /* Firefox  */
   height: -webkit-calc(100% - 37px);  /* WebKit   */
@@ -423,19 +423,17 @@ ul.side-nav li.side-menu-end {
   overflow-y: auto;
 }
 .blocklyTreeRow {
-  background: none !important;
+  background: none;
   border: none !important;
   margin: 0px 0px !important;
-  padding: 7px 16px 7px 0px !important;
-  margin: 10px !important;
+  padding: 14px 16px 14px 0px !important;
+  margin: 0 !important;
   box-sizing: content-box !important;
-  border-radius: 5px;
-  transition: .2s all;
+  transition: .25s all;
   font-family: 'Poppins' !important;
 }
 .blocklyTreeSelected {
-  background: linear-gradient(to right, #f7923f 0%,#e5642a 99%) !important;  /* arduino orange */
-  box-shadow: -5px 5px 15px rgba(0,0,0,0.2) !important;
+  background-color: #7548e1 !important;
   transition: .25s all;
 }
 .blocklyTreeRow:not(.blocklyTreeSelected):hover {
@@ -443,7 +441,8 @@ ul.side-nav li.side-menu-end {
 }
 .blocklyTreeLabel {
   font-family: 'Poppins' !important;
-  font-weight: 600 !important;
+  font-weight: 400 !important;
+  padding: 0 20px !important;
 }
 .blocklyTreeSeparator{
   padding: 0px !important;
@@ -481,12 +480,8 @@ ul.side-nav li.side-menu-end {
 /*********************************/
 /* Modify container to have a larger width in all resolutions */
 .container {
-  max-width: initial !important;
   padding: none;
   width: 100%;
-}
-.row .col {
-  padding: 0 !important;
 }
 
 /* Change table padding (interferes with colour picker) */
@@ -521,28 +516,64 @@ ul.side-nav li.side-menu-end {
 ul.side-nav {
   padding: 0px !important;
   line-height: 64px !important;
+  background: linear-gradient(to right, #5748e1 0%,#7a4ef2 100%);
+  box-shadow: rgba(0, 0, 0, 0.34902) 0px 0px 87px 0px !important;
+  width: 275px !important;
 }
-ul.side-nav i {
-  font-size: 1.8rem !important;
+
+ul.side-nav .menu-header {
+  background-color: #fbfbfb;
+  padding: 0 35px;
 }
+
+ul.side-nav .menu-header li {
+  display: inline-block;
+}
+
+ul.side-nav .menu-header li a {
+  padding: 15px;
+  line-height: 1 !important;
+}
+
+ul.side-nav .menu-header p.title {
+  line-height: 1.2 !important;
+  padding: 30px 12px 10px 12px;
+  font-size: 1.9em;
+  color: #564eda;
+}
+
+ul.side-nav .menu-header p.title strong {
+  font-weight: 700;
+}
+
 ul.side-nav .collapsible {
   margin: 0 !important;
 }
-/* Set the background effect in the side menu */
-ul.side-nav {
-  background-color: transparent;
-  box-shadow: none !important;
+
+ul.side-nav li a {
+  color: #fff;
+  font-weight: 300;
+  line-height: 1.6 !important;
+  height: auto !important;
+  padding: 15px 50px;
+  font-size: 1.1em;
+  transition: .25s all;
 }
-ul.side-nav li {
-  background-color: #eeeeee;
+
+ul.side-nav li a .label {
+  font-size: 0.6em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 2px 5px;
+  border-radius: 3px;
+  background-color: #eb458b;
+  line-height: 1.2;
 }
+
 ul.side-nav li {
-  background-color: #eeeeee;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  border-right: 2px solid #dddddd;
-  border-left: 2px solid #ffffff;
 }
 ul.side-nav li ul li ul {
   cursor: pointer;
@@ -550,6 +581,10 @@ ul.side-nav li ul li ul {
 }
 ul.side-nav li ul li ul li {
   border: none !important;
+}
+
+ul.side-nav .menu-divider {
+  max-width: 275px;
 }
 
 /* Add extra margin to the side menu button*/
@@ -586,4 +621,168 @@ ul.side-nav li ul li ul li {
   padding: 0 1px !important;
   width: 100% !important;
   background-color: white !important;
+}
+
+.settings-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: #fbfbfb;
+  z-index: 999;
+}
+
+.settings-overlay .button-fancy {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+}
+
+.settings-overlay .container {
+  width: auto;
+  max-width: 900px;
+}
+
+.settings-overlay .main-title {
+  font-weight: 700;
+  margin: 30px 0;
+  line-height: 1.2;
+  background: linear-gradient(to right, #5748e1 0%,#7a4ef2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.settings-overlay .label {
+  background-color: #454545;
+  padding: 3px 11px;
+  border-radius: 3px;
+  color: #fff;
+  position: relative;
+  top: -9px;
+  left: 25px;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.settings-overlay h4 {
+  margin-bottom: 30px;
+}
+
+.kit-card img {
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 3px 25px 0px rgba(0, 0, 0, 0.14);
+  max-width: 100%;
+  margin-bottom: -35px;
+}
+
+
+.kit-card ul {
+  border-radius: 5px;
+  background-color: #fbfbfb;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.14);
+  position: relative;
+  margin: 0 15px;
+}
+
+
+.kit-card ul li {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}
+
+.kit-card ul li:first-child {
+  border-right: 1px solid rgba(0,0,0,0.2);
+}
+
+.kit-card ul li a {
+  color: #454545;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: .25s all;
+  padding: 12px 0;
+  display: block;
+  font-size: 0.9em;
+}
+
+.kit-card ul:hover a {
+  opacity: 0.5;
+}
+
+.kit-card ul a:hover {
+  opacity: 1;
+}
+
+.kit-card ul.selected {
+  background-color: #a0ce24;
+}
+
+.kit-card ul.selected li:first-child a {
+  color: #fff;
+}
+
+.kit-card ul.selected a {
+  color: rgba(0,0,0,0.5);
+}
+
+.kit-card span.product-name {
+  display: block;
+  margin: 15px;
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #353535;
+}
+
+.io-select {
+  background-color: #fbfbfb;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.14);
+  border-radius: 5px;
+  overflow: hidden;
+  height: 60px;
+  margin-bottom: 20px;
+  display: inline-block;
+  clear: both;
+  font-size: 0;
+}
+
+.io-select img {
+  width: 60px;
+  height: 60px;
+  float: left;
+}
+
+.io-select .text {
+  display: inline-block;
+  height: 60px;
+  margin: 11px;
+  margin-right: 25px;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.io-select .text strong {
+  font-weight: 700;
+}
+
+.io-select input[type=text] {
+  color: #353535;
+  font-weight: 700;
+  width: 40px;
+  display: inline-block;
+  vertical-align: top;
+  height: 60px;
+  border: none !important;
+  background-color: #f5f5f5;
+  text-align: center;
+  padding: 0 10px;
+  border-left: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+.io-select .io-select:first-child input[type=text] {
+  border-width: 0 !important;
 }

@@ -18,6 +18,21 @@
 
   <script src="clipboard.min.js"></script>
 
+<script>
+
+var kitConfig = {
+  connections: {
+    buzzer:11,
+    ultrasonic: {
+      trig: 7,
+      echo: 6
+    }
+  },
+  projName: "Michael"
+}
+
+</script>
+
   <!-- Ardublockly - These three files contain the compress version -->
   <!--script src="../blockly/blockly_compressed.js"></script>
   <script src="../blockly/blocks_compressed.js"></script>
@@ -66,6 +81,76 @@
 </head>
 
 <body>
+  <!-- Full-screen settings overlay -->
+  <div class="settings-overlay" style="display: block;">
+    <a href="javascript:hideSettings()" class="button-fancy">Close <i class="far fa-times-circle"></i></a>
+    <div class="container">
+
+      <h3 class="main-title">Settings</h3><span class="label">Codeables Alpha 0.0.95</span>
+
+      <div class="row">
+
+        <div class="col m7">
+          <h4>Select your kit</h4>
+          <div class="row">
+
+            <div class="col m6">
+              <div class="kit-card">
+                <img src="https://i2.wp.com/edukits.co/wp-content/uploads/Annoyatron-Cover.png?fit=1024%2C1024&ssl=1">
+                <ul class="options">
+                  <li><a href="#">Select kit</a></li><li><a href="#">Buy now</a></li>
+                </ul>
+                <span class="product-name">The Amazing Annoyatron</span>
+              </div>
+            </div>
+
+            <div class="col m6">
+              <div class="kit-card">
+                <img src="https://i2.wp.com/edukits.co/wp-content/uploads/Product-Photo.png?fit=1024%2C1024&ssl=1">
+                <ul class="options selected">
+                  <li><a href="#">Selected</a></li><li><a href="#">Buy now</a></li>
+                </ul>
+                <span class="product-name">Code Kit <br>by EduKits</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col m5">
+          <h4>Input/output</h4>
+
+          <div class="io-select">
+            <img src="img/buzzer.svg">
+            <div class="text">
+              <strong>Buzzer</strong><br>at pin
+            </div>
+            <input type="text" value="11">
+          </div>
+
+          <div class="io-select">
+            <img src="img/ultrasonic.svg">
+            <div class="text">
+              <strong>Ultrasonic</strong><br>at pins
+            </div>
+            <input type="text" value="7">
+            <input type="text" value="6">
+          </div>
+
+          <div class="io-select">
+            <img src="img/touch.svg">
+            <div class="text">
+              <strong>Touch</strong><br>at pin
+            </div>
+            <input type="text" value="11">
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- Horizontal Navigation bar -->
   <nav class="nav-fixed" style="max-width: 70%;">
     <div class="nav-wrapper container">
@@ -74,8 +159,8 @@
       </a>
       <div class="icon-menu" style="display:inline-block; width: 190px; font-size: 0.8em; color: #444444;">
         <ul style="height:100%;position: relative;top: 18px;">
-          <li><a href="#"><i class="far fa-bars" style="color:#444444; font-size: 18px;"></i></a></li>
-          <li><a href="#"><i class="far fa-cogs" style="color:#444444; font-size: 18px;"></i></a></li>
+          <li><a class="show-on-large button-collapse" href="#" data-activates="slide-out" id="button-collapse"><i class="far fa-bars" style="color:#444444; font-size: 18px;"></i></a></li>
+          <li><a href="javascript:showSettings()"><i class="far fa-cogs" style="color:#444444; font-size: 18px;"></i></a></li>
           <li><a href="javascript:Ardublockly.createNewProject"><i class="far fa-plus" style="color:#444444; font-size: 18px;"></i></a></li>
         </ul>
       </div>
@@ -93,6 +178,28 @@
       </ul>
     </div>
   </nav>
+
+  <!-- Sidebar navigation -->
+  <ul id="slide-out" class="side-nav">
+    <div class="menu-header">
+      <ul style="height:100%;position: relative;top: 18px;">
+        <li><a href="#"><i class="far fa-question-circle" style="color:#444444; font-size: 18px;"></i></a></li>
+        <li><a href="#"><i class="far fa-trash-alt" style="color:#444444; font-size: 18px;"></i></a></li>
+        <li><a href="javascript:showSettings()"><i class="far fa-cogs" style="color:#444444; font-size: 18px;"></i></a></li>
+        <li><a class="sidenav-close" href="javascript:closeMenuBar()"><i class="far fa-times" style="color:#eb458b; font-size: 18px;"></i></a></li>
+      </ul>
+      <p class="title">Codeables <strong>Studio</strong></p>
+    </div>
+    <img class="menu-divider" src="img/menu-divider.png">
+    <li class="inner-menu">
+      <ul>
+        <li><a href="#"><span class="translatable_open">New project</span></a></li>
+        <li><a href="javascript:showSettings()"><span class="translatable_open">Settings</span></a></li>
+        <li><a href="https://edukits.co/quickstart/"><span class="translatable_open">Build your kit</span></a></li>
+        <li><a href="#"><span class="translatable_open"><span class="label">Coming soon</span><br>Share your code</span></a></li>
+        <li><a href="#"><span class="translatable_open">Getting started</span></a></li>
+      </ul>
+  </ul>
 
   <!-- Content -->
   <div class="container">
@@ -283,6 +390,10 @@
       Ardublockly.resetIdeOutputContent();
       Ardublockly.sendCode();
     }
-  </script>
+
+    function closeMenuBar() {
+      $('.button-collapse').sideNav('close');
+    }
+</script>
 </body>
 </html>
