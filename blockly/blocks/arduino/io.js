@@ -115,6 +115,48 @@ Blockly.Blocks['io_ultrasonicread'] = {
   },
 };
 
+Blockly.Blocks['io_lightread'] = {
+  /**
+   * Block for reading the value from a Light Sensor
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setColour(330);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("img/lightsensorico.png", 14, 14, "*"))
+        .appendField("Read light")
+    this.setOutput(true, Blockly.Types.NUMBER.output);
+  },
+};
+
+Blockly.Blocks['io_touchread'] = {
+  /**
+   * Block for reading a simple capacative touch sensor
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalRead');
+    this.setColour(330);
+    this.appendDummyInput()
+    .appendField(new Blockly.FieldImage("img/touchico.png", 14, 14, "*"))
+        .appendField("Touching sensor?")
+    this.setOutput(true, Blockly.Types.BOOLEAN.output);
+    this.setTooltip(Blockly.Msg.ARD_DIGITALREAD_TIP);
+  },
+  /** @return {!string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.BOOLEAN;
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'digitalPins');
+  }
+};
+
 Blockly.Blocks['io_digitalwrite'] = {
   /**
    * Block for creating a 'set pin' to a state.

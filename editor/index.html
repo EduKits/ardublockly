@@ -1,0 +1,500 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#00878F">
+  <link rel="icon" href="img/favicon.png">
+  <title class="translatable_title">Codeables Editor</title>
+
+  <!-- Materialize, Prettify, and Ardublockly CSS -->
+  <link rel="stylesheet" href="materialize/materialize.css" media="screen,projection">
+  <link rel="stylesheet" href="prettify/arduino.css">
+  <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
+  <link rel="stylesheet" href="fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="fontawesome/css/fontawesome-all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="clipboard.min.js"></script>
+
+<script>
+
+var kitConfig = {
+  connections: {
+    buzzer:11,
+    ultrasonic: [{
+      trig: 9,
+      echo: 8
+    }],
+    touch: 7,
+    ldr:"A0",
+    colourLED: {
+      red: 3,
+      green: 5,
+      blue: 6,
+    }
+  },
+  projName: "Michael"
+}
+
+</script>
+
+  <!-- Ardublockly - These three files contain the compress version -->
+  <!--script src="../blockly/blockly_compressed.js"></script>
+  <script src="../blockly/blocks_compressed.js"></script>
+  <script src="../blockly/arduino_compressed.js"></script-->
+
+  <script src="../blockly/blockly_uncompressed.js"></script>
+    <script src="../blockly/blocks/logic.js"></script>
+    <script src="../blockly/blocks/loops.js"></script>
+    <script src="../blockly/blocks/math.js"></script>
+    <script src="../blockly/blocks/text.js"></script>
+    <script src="../blockly/blocks/lists.js"></script>
+    <script src="../blockly/blocks/colour.js"></script>
+    <script src="../blockly/blocks/variables.js"></script>
+    <script src="../blockly/blocks/procedures.js"></script>
+    <script src="../blockly/blocks/arduino/io.js"></script>
+    <script src="../blockly/blocks/arduino/map.js"></script>
+    <script src="../blockly/blocks/arduino/procedures.js"></script>
+    <script src="../blockly/blocks/arduino/serial.js"></script>
+    <script src="../blockly/blocks/arduino/servo.js"></script>
+    <script src="../blockly/blocks/arduino/spi.js"></script>
+    <script src="../blockly/blocks/arduino/stepper.js"></script>
+    <script src="../blockly/blocks/arduino/time.js"></script>
+    <script src="../blockly/blocks/arduino/tone.js"></script>
+    <script src="../blockly/blocks/arduino/variables.js"></script>
+    <script src="../blockly/generators/arduino.js"></script>
+    <script src="../blockly/generators/arduino/boards.js"></script>
+    <script src="../blockly/generators/arduino/io.js"></script>
+    <script src="../blockly/generators/arduino/lists.js"></script>
+    <script src="../blockly/generators/arduino/logic.js"></script>
+    <script src="../blockly/generators/arduino/loops.js"></script>
+    <script src="../blockly/generators/arduino/map.js"></script>
+    <script src="../blockly/generators/arduino/math.js"></script>
+    <script src="../blockly/generators/arduino/procedures.js"></script>
+    <script src="../blockly/generators/arduino/serial.js"></script>
+    <script src="../blockly/generators/arduino/servo.js"></script>
+    <script src="../blockly/generators/arduino/spi.js"></script>
+    <script src="../blockly/generators/arduino/stepper.js"></script>
+    <script src="../blockly/generators/arduino/text.js"></script>
+    <script src="../blockly/generators/arduino/time.js"></script>
+    <script src="../blockly/generators/arduino/tone.js"></script>
+    <script src="../blockly/generators/arduino/variables.js"></script>
+
+  <!-- Default language js files, user selection appended to head on load -->
+  <script src="../blockly/msg/js/en.js"></script>
+  <script src="msg/en.js"></script>
+</head>
+
+<body>
+  <!-- Full-screen settings overlay -->
+  <div class="settings-overlay" style="display: block;">
+    <a href="javascript:hideSettings()" class="button-fancy">Close <i class="far fa-times-circle"></i></a>
+    <div class="container">
+
+      <h3 class="main-title">Settings</h3><span class="label">Codeables Alpha 0.5.0</span>
+
+      <div class="row">
+
+        <div class="col m7">
+          <h4>Select your kit</h4>
+          <div class="row">
+
+            <div class="col m6">
+              <div class="kit-card">
+                <img src="https://i2.wp.com/edukits.co/wp-content/uploads/Annoyatron-Cover.png?fit=1024%2C1024&ssl=1">
+                <ul class="options">
+                  <li><a href="#" class="button select-kit">Select kit</a></li><li><a href="https://edukits.co/shop/electronics-kits/the-amazing-annoyatron/">Buy now</a></li>
+                </ul>
+                <span class="product-name">The Amazing Annoyatron</span>
+              </div>
+            </div>
+
+            <div class="col m6">
+              <div class="kit-card">
+                <img src="https://i2.wp.com/edukits.co/wp-content/uploads/Product-Photo.png?fit=1024%2C1024&ssl=1">
+                <ul class="options selected">
+                  <li><a href="#" class="button select-kit">Selected</a></li><li><a href="#">Buy now</a></li>
+                </ul>
+                <span class="product-name">Code Kit <br>by EduKits</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col m5">
+          <h4>Input/output</h4>
+
+          <div class="io-select closed" data-component="buzzer">
+            <div class="shell">
+              <div class="top-content">
+                <img src="img/buzzer.svg">
+                <div class="text">
+                  <p><strong>Buzzer</strong><br><span class="subtitle">connected to pin</span></p>
+                  <span class="pin-config" data-instance="0">11</span>
+                  <a href="#" class="button edit">Edit <i class="fal fa-chevron-down"></i></a>
+                </div>
+              </div>
+              <div class="inputs">
+                <a class="button check" href="#"><i class="fal fa-check"></i></a>
+                <div class="input">
+                  <input type="text" class="valid-pin" data-instance="0" placeholder="11">
+                </div>
+              </div>
+            </div>
+            <a class="reset" href="#"><i class="fal fa-undo"></i> <span>Reset to default</span></a>
+          </div>
+
+          <div class="io-select closed" data-component="ultrasonic">
+            <div class="shell">
+              <div class="top-content">
+                <img src="img/ultrasonic.svg">
+                <div class="text">
+                  <p><strong>Ultrasonic</strong><br><span class="subtitle">connected to pins</span></p>
+                  <span class="pin-config" data-instance="0">9</span>
+                  <span class="pin-config" data-instance="1">8</span>
+                  <a href="#" class="button edit">Edit <i class="fal fa-chevron-down"></i></a>
+                </div>
+              </div>
+              <div class="inputs">
+                <a class="button check" href="#"><i class="fal fa-check"></i></a>
+                <div class="input help">
+                  <input type="text" class="valid-pin" data-instance="0" placeholder="9">
+                  <span class="help">Trig.</span>
+                </div>
+                <div class="input help">
+                  <input type="text" class="valid-pin" data-instance="1" placeholder="8">
+                  <span class="help">Echo</span>
+                </div>
+              </div>
+            </div>
+            <a class="reset" href="#"><i class="fal fa-undo"></i> <span>Reset to default</span></a>
+          </div>
+
+          <div class="io-select closed" data-component="touch">
+            <div class="shell">
+              <div class="top-content">
+                <img src="img/touch.svg">
+                <div class="text">
+                  <p><strong>Touch sensor</strong><br><span class="subtitle">connected to pin</span></p>
+                  <span class="pin-config" data-instance="0">7</span>
+                  <a href="#" class="button edit">Edit <i class="fal fa-chevron-down"></i></a>
+                </div>
+              </div>
+              <div class="inputs">
+                <a class="button check" href="#"><i class="fal fa-check"></i></a>
+                <div class="input">
+                  <input type="text" class="valid-pin" data-instance="0" placeholder="7">
+                </div>
+              </div>
+            </div>
+            <a class="reset" href="#"><i class="fal fa-undo"></i> <span>Reset to default</span></a>
+          </div>
+
+          <div class="io-select closed" data-component="ldr">
+            <div class="shell">
+              <div class="top-content">
+                <img src="img/light.svg">
+                <div class="text">
+                  <p><strong>Light sensor</strong><br><span class="subtitle">connected to pin</span></p>
+                  <span class="pin-config button-std">A0</span>
+                  <a href="#" class="button edit">Edit <i class="fal fa-chevron-down"></i></a>
+                </div>
+              </div>
+              <div class="inputs">
+                <a class="button check" href="#"><i class="fal fa-check"></i></a>
+                <div class="input">
+                  <input type="text" class="valid-pin" placeholder="A0">
+                </div>
+              </div>
+            </div>
+            <a class="reset" href="#"><i class="fal fa-undo"></i> <span>Reset to default</span></a>
+          </div>
+
+          <div class="io-select closed" data-component="colourLED">
+            <div class="shell">
+              <div class="top-content">
+                <img src="img/rgbLED.svg">
+                <div class="text">
+                  <p><strong>Colour LED</strong><br><span class="subtitle">connected to pins</span></p>
+                  <span class="pin-config" data-instance="0">3</span>
+                  <span class="pin-config" data-instance="1">5</span>
+                  <span class="pin-config" data-instance="2">6</span>
+                  <a href="#" class="button edit">Edit <i class="fal fa-chevron-down"></i></a>
+                </div>
+              </div>
+              <div class="inputs">
+                <a class="button check" href="#"><i class="fal fa-check"></i></a>
+                <div class="input help">
+                  <input type="text" class="valid-pin" data-instance="0" placeholder="3">
+                  <span class="help">Red</span>
+                </div>
+                <div class="input help">
+                  <input type="text" class="valid-pin" data-instance="1" placeholder="5">
+                  <span class="help">Green</span>
+                </div>
+                <div class="input help">
+                  <input type="text" class="valid-pin" data-instance="2" placeholder="6">
+                  <span class="help">Blue</span>
+                </div>
+              </div>
+            </div>
+            <a class="reset" href="#"><i class="fal fa-undo"></i> <span>Reset to default</span></a>
+          </div>
+
+          <a class="button new-part tooltipped" href="#" data-position="top" data-tooltip="Coming soon"><i class="fal fa-microchip"></i> <span class="text">Add new<br> part</span></a>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Horizontal Navigation bar -->
+  <nav class="nav-fixed" style="max-width: 70%;">
+    <div class="nav-wrapper container">
+      <a href="https://codeables.io/">
+        <img src="img/favicon.svg" class="main-logo" style="height:100px; padding: 18px; float:left;" />
+      </a>
+      <div class="icon-menu" style="display:inline-block; width: 190px; font-size: 0.8em; color: #444444;">
+        <ul style="height:100%;position: relative;top: 18px;">
+          <li><a class="show-on-large button-collapse" href="#" data-activates="slide-out" id="button-collapse"><i class="far fa-bars" style="color:#444444; font-size: 18px;"></i></a></li>
+          <li><a href="javascript:showSettings()"><i class="far fa-cogs" style="color:#444444; font-size: 18px;"></i></a></li>
+          <li><a href="javascript:Ardublockly.createNewProject"><i class="far fa-plus" style="color:#444444; font-size: 18px;"></i></a></li>
+        </ul>
+      </div>
+      <a style="display:none !important;" class="show-on-large button-collapse" href="#" data-activates="slide-out" id="button-collapse"><i class="mdi-navigation-menu"></i></a>
+      <a id="logo-container" class="brand-logo">
+        <!-- Sketch name editable text field -->
+        <span class="sketch_name_wrapper">
+          <i class="mdi-image-edit sketch_name_icon"></i>
+          <input id="sketch_name" class="sketch_name" type="text">
+        </span>
+      </a>
+      <!-- Horizontal Navbar links only shown on large resolutions -->
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="javascript:blocklyZoomIn()" class="button-fancy">Help &amp; support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Sidebar navigation -->
+  <ul id="slide-out" class="side-nav">
+    <div class="menu-header">
+      <ul style="height:100%;position: relative;top: 18px;">
+        <li><a href="#"><i class="far fa-question-circle" style="color:#444444; font-size: 18px;"></i></a></li>
+        <li><a href="#"><i class="far fa-trash-alt" style="color:#444444; font-size: 18px;"></i></a></li>
+        <li><a href="javascript:showSettings()"><i class="far fa-cogs" style="color:#444444; font-size: 18px;"></i></a></li>
+        <li><a class="sidenav-close" href="javascript:closeMenuBar()"><i class="far fa-times" style="color:#eb458b; font-size: 18px;"></i></a></li>
+      </ul>
+      <p class="title">Codeables <strong>Studio</strong></p>
+    </div>
+    <img class="menu-divider" src="img/menu-divider.png">
+    <li class="inner-menu">
+      <ul>
+        <li><a href="#"><span class="translatable_new">New project</span></a></li>
+        <li><a href="javascript:showSettings()"><span class="translatable_settings">Settings</span></a></li>
+        <li><a href="https://edukits.co/quickstart/"><span class="translatable_open">Build your kit</span></a></li>
+        <li><a href="#"><span class="translatable_open"><span class="label">Coming soon</span><br>Share your code</span></a></li>
+        <li><a href="#"><span class="translatable_open">Getting started</span></a></li>
+      </ul>
+  </ul>
+
+  <!-- Content -->
+  <div class="container">
+    <div class="row">
+      <div class="blockly-container" style="position:relative">
+        <!-- Toolbox visibility button -->
+        <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off" style="display: none"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
+        <!-- Arduino IDE action buttons -->
+        <div id="content_blocks" class="content z-depth-1" style="height:100%;"></div>
+        <!-- Blockly Panel -->
+
+      </div>
+
+      <div class="code-container">
+        <div class="container-header">
+          <ul>
+            <li><a href="javascript:downloadcode()" class="download-code"><span class="translatable_download">Download</span> <i class="far fa-arrow-circle-down"></i></a></li>
+            <li><a href="javascript:copycode()" class="copy-code" data-clipboard-target="#content_arduino"><span class="translatable_copy">Copy code</span> <i class="fal fa-copy"></i></a></li>
+          </ul>
+        </div>
+        <pre id="content_arduino" class="content content_height_transition content_arduino_large prettyprint"></pre>
+        <ul class="collapsible z-depth-1" style="display: none;" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header active">
+              <span class="collapsible_logo">{ }</span>
+              <span class="translatable_arduinoSourceCode">Arduino Source Code</span>
+            </div>
+            <div class="collapsible-body">
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header" id="xml_collapsible_header">
+              <span class="collapsible_logo">&#60; &#62;</span>
+              <span class="translatable_blocksXml">Blocks XML</span>
+            </div>
+            <div class="collapsible-body" style="position:relative" id="xml_collapsible_body">
+              <a class="btn-floating btn-large waves-effect waves-light arduino_teal z-depth-1-half" id="button_load_xml"><i class="mdi-action-extension"></i></a>
+              <textarea id="content_xml" class="content content_height_transition content_xml_large" wrap="soft"></textarea>
+            </div>
+          </li>
+        </ul>
+        <nav class="nav-bar">
+          <ul>
+            <li class="wd-40 text-link">
+              <a href="#" id="button_load">
+                <i class="fal fa-arrow-from-bottom"></i>
+                <span class="translatable_open">Open</span>
+              </a>
+            </li>
+            <li class="wd-40 text-link">
+              <a href="#" id="button_save">
+                <i class="fal fa-arrow-to-bottom"></i>
+                Save
+              </a>
+            </li>
+            <li class="wd-20">
+              <a href="#" id="button_delete">
+                <i class="fal fa-trash-alt"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Settings: Displayed as a Materialize Modal -->
+  <div id="settings_dialog" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4><span class="translatable_settings">Settings</span></h4>
+      <div class="modal_section">
+        <label><span class="translatable_compilerLocation">Compiler Location</span>:</label>
+        <input type="text" id="settings_compiler_location">
+      </div>
+      <div class="modal_section">
+        <label><span class="translatable_sketchFolder">Sketch Folder</span>:</label>
+        <input type="text" id="settings_sketch_location">
+      </div>
+      <div class="modal_section">
+        <label><span class="translatable_arduinoBoard">Arduino Board</span>:</label>
+        <select name="settings_board" id="board">
+          <option value="uno" class="translatable_arduinoBoardDefault">Arduino Board unknown</option>
+        </select>
+      </div>
+      <div class="modal_section">
+        <label><span class="translatable_comPort">COM Port<span>:</label>
+        <select name="settings_serial" id="serial_port">
+          <option value="COMX" class="translatable_comPortDefault">COM Port unknown</option>
+        </select>
+      </div>
+      <div class="modal_section">
+        <label><span class="translatable_defaultIdeButton">Default IDE button</span>:</label>
+        <select name="settings_ide" id="ide_settings">
+          <option value="verify" class="translatable_defaultIdeButtonDefault">IDE options unknown</option>
+        </select>
+      </div>
+      <div class="modal_section">
+        <label><span class="translatable_language">Language</span>:</label>
+        <select name="settings_language" id="language"></select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="waves-effect btn-flat modal-close"><span class="translatable_return">Return</span></a>
+    </div>
+  </div>
+
+  <!-- Select Additional Blocks menu -->
+  <div id="blocks_menu" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <div>id="button_save"
+        <h4><span class="translatable_addBlocksTitle">Additional Blocks</span></h4>
+      </div>
+      <div id="blocks_menu_body"></div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="waves-effect btn-flat modal-close"><span class="translatable_return">Return</span></a>
+    </div>
+  </div>
+
+  <!-- General Alert: Content is loaded using JavaScript to display alerts -->
+  <div id="gen_alert" class="modal modal_small modal-fixed-footer">
+    <div class="modal-content">
+      <h5 id="gen_alert_title" style="font-weight: 700;">Empty Alert</h4>
+      <p><span id="gen_alert_body">Empty alert text</span></p>
+    </div>
+    <div class="modal-footer">
+      <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close"><span class="translatable_okay">Okay</span></a>
+      <a id="gen_alert_cancel_link" href="#" class="waves-effect btn-flat modal-close"><span class="translatable_cancel">Cancel</span></a>
+    </div>
+  </div>
+
+  <!-- Prompt: Content is loaded using JavaScript to display input prompt -->
+  <div id="gen_prompt" class="modal modal_small modal-fixed-footer">
+    <div class="modal-content">
+      <p><span id="gen_prompt_message">Prompt message</span></p>
+      <p><input id="gen_prompt_input" value="test" /></p>
+    </div>
+    <div class="modal-footer">
+      <a id="gen_prompt_ok_link" href="#" class="waves-effect btn-flat modal-close"><span class="translatable_okay">Okay</span></a>
+      <a id="gen_prompt_cancel_link" href="#" class="waves-effect btn-flat modal-close"><span class="translatable_cancel">Cancel</span></a>
+    </div>
+  </div>
+
+  <!-- Local Modal to be shown if Ardublockly Server is not running. -->
+  <div id="not_running_dialog" class="modal">
+    <div class="modal-content">
+      <div>
+        <h4 id="gen_alert_title"><span class="translatable_noServerTitle">Ardublockly app not running</span></h4>
+      </div>
+      <div class="translatable_noServerBody">
+        <p>For all the Ardublockly features to be enabled, the Ardublockly desktop application must be running locally on your computer.</p>
+        <p>If you are using an online version you will not be able to configure the settings nor load the blocks code into an Arduino.</p>
+        <p>Installation instruction can be found in the <a href="https://github.com/carlosperate/ardublockly">Ardublockly repository</a>.</p>
+        <p>If you have Ardublockly already installed, make sure the application is running correctly.</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close"><span class="translatable_okay">Okay</span></a>
+    </div>
+  </div>
+
+  <!-- Desktop version of Ardublockly JS, needs to be loaded first. -->
+  <script src="ardublockly_desktop.js"></script>
+  <!-- Materialize JS -->
+  <script src="js_libs/jquery-2.1.3.min.js"></script>
+  <script src="materialize/materialize.js"></script>
+  <!-- FileSaver JS -->
+  <script src="js_libs/FileSaver.min.js"></script>
+  <!-- JS Diff -->
+  <script src="js_libs/diff.js"></script>
+  <!-- Prettify JS -->
+  <script src="prettify/prettify.js"></script>
+  <!-- Ardublockly app -->
+  <script src="ardublocklyserver_ajax.js"></script>
+  <script src="ardublockly_lang.js"></script>
+  <script src="ardublockly_design.js"></script>
+  <script src="ardublockly_toolbox.js"></script>
+  <script src="ardublockly_blockly.js"></script>
+  <script src="ardublockly.js"></script>
+  <script>
+    window.addEventListener('load', function load(event) {
+      window.removeEventListener('load', load, false);
+      Ardublockly.init();
+    });
+    function sendallcode() {
+      Ardublockly.shortMessage(Ardublockly.getLocalStr('openingSketch'));
+      Ardublockly.resetIdeOutputContent();
+      Ardublockly.sendCode();
+    }
+
+    function closeMenuBar() {
+      $('.button-collapse').sideNav('close');
+    }
+</script>
+</body>
+</html>

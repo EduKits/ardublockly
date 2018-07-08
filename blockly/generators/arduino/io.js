@@ -59,6 +59,10 @@ Blockly.Arduino['io_writeRGBLED'] = function(block) {
  * @return {string} Completed code.
  */
 Blockly.Arduino['io_setRGBLED'] = function(block) {
+  var pinRed = kitConfig.connections.colourLED.red;
+  var pinGreen = kitConfig.connections.colourLED.green;
+  var pinBlue = kitConfig.connections.colourLED.blue;
+
   var hexColour = block.getFieldValue('COLOUR');
 
   var lightType = block.getFieldValue('LED');
@@ -70,10 +74,10 @@ Blockly.Arduino['io_setRGBLED'] = function(block) {
   $blue = colorsOnly[2];
 
   if(lightType == "COLOUR") {
-    var code = 'analogWrite(9, '+$red+');\nanalogWrite(10, '+$green+');\nanalogWrite(11, '+$blue+');\n';
+    var code = 'analogWrite('+pinRed+', '+$red+');\nanalogWrite('+pinGreen+', '+$green+');\nanalogWrite('+pinBlue+', '+$blue+');\n';
     return code;
   } else if(lightType == "ANODE") {
-    var code = 'analogWrite(9, 255 - '+$red+');\nanalogWrite(10, 255 - '+$green+');\nanalogWrite(11, 255 - '+$blue+');\n';
+    var code = 'analogWrite('+pinRed+', 255 - '+$red+');\nanalogWrite('+pinGreen+', 255 - '+$green+');\nanalogWrite('+pinBlue+', 255 - '+$blue+');\n';
     return code;
   }
 };
@@ -128,6 +132,47 @@ Blockly.Arduino['io_ultrasonicread'] = function(block) {
 
   var code = 'readDistance()';
   return [code, Blockly.Arduino.ORDER_ATOMIC]; // We have to declare that this value will return a number when run
+};
+
+/**
+ * Function for reading a value from a light sensor.
+ *
+ */
+Blockly.Arduino['io_lightread'] = function(block) {
+  var units = block.getFieldValue('UNITS');
+
+  var pin = kitConfig.connections.ldr;
+  var echoPin = kitConfig.connections.ultrasonic.echo;
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Ultrasonic Read');
+  Blockly.Arduino.reservePin(
+      block, echoPin, Blockly.Arduino.PinTypes.INPUT, 'Ultrasonic Read');
+
+  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+  Blockly.Arduino.addSetup('ultrasonic', pinSetupCode, false);
+
+  var code = 'analogRead(' + pin + ')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC]; // We have to declare that this value will return a number when run
+};
+
+/**
+ * Function for reading a touch sensor
+ * Arduino code: setup { pinMode(X, INPUT); }
+ *               loop  { digitalRead(X)     }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
+ */
+Blockly.Arduino['io_touchread'] = function(block) {
+  var pin = kitConfig.connections.touch;
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+
+  var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+
+  var code = 'digitalRead(' + pin + ')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 
