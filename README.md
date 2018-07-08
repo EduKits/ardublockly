@@ -1,19 +1,22 @@
-# Ardublockly
-Ardublockly is a visual programming editor for Arduino. It is based on Google's [Blockly][1], which has been forked to generate [Arduino][15] code.
+# Codeables Studio
+Codeables Studio is a cool new visual programming editor for Arduino. It uses the smarts from Google's [Blockly][1] with great design and features from [EduKits][2] to create a platform that's both fun and easy to use.
+  
+Edit on-the-go with our online app at [codeables.io][3] or download our Windows (coming soon) or Mac apps.
 
 The `ArdublocklyServer` Python package initialises a local server to be able to compile and load the Arduino code using the [Arduino IDE][2].
 
 This is all packaged in a self contained executable desktop application for Windows, Mac OS X, and Linux.
 
-![Ardublockly desktop program screenshot][desktop_screeshot]
+![Codeables Studio desktop program screenshot][desktop_screeshot]
 
 
 ## Features
-* Generates Arduino code with visual drag-and-drop blocks
-* Uploads the code to an Arduino Board
-* Useful "code block warnings"
-* Compatible with a wide range of official Arduino Boards
-* Works on Windows / Linux / Mac OS X
+* Create programs using visual drag-and-drop blocks
+* Compatible with a growing number of parts, sensors and kits
+* Has useful "code block warnings"
+* Free classroom projects & resources for schools (coming soon)
+* Simple for beginners yet powerful for more advanced users
+* Works on Windows / Mac OS / iPad (Online Editor)
 
 Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the [TODO.md][3] file.
 
@@ -108,8 +111,8 @@ limitations under the License.
 
 
 [1]: https://developers.google.com/blockly/
-[2]: http://www.arduino.cc/en/main/software/
-[3]: TODO.md
+[2]: https://edukits.co/
+[3]: https://codeables.io/
 [4]: https://github.com/carlosperate/ardublockly/releases/
 [5]: https://github.com/carlosperate/ardublockly/wiki/Installing-Ardublockly
 [6]: https://github.com/carlosperate/ardublockly/wiki/Configure-Ardublockly
@@ -125,6 +128,6 @@ limitations under the License.
 [16]: https://github.com/BlocklyDuino/BlocklyDuino
 [17]: blockly/README.md
 
-[desktop_screeshot]: http://carlosperate.github.io/ardublockly/images/screenshot_desktop_1.png
+[desktop_screeshot]: https://codeables.io/wp-content/uploads/2018/07/Codeables-Image.jpg
 [web_screenshot_responsive]: http://carlosperate.github.io/ardublockly/images/screenshot_material_all_small.jpg
 [web_screenshot_classic]: http://carlosperate.github.io/ardublockly/images/screenshot_1.png
